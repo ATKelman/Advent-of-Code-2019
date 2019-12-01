@@ -11,30 +11,25 @@ namespace Advent_of_Code_2019.Days
     {
         public string PartOne()
         {
-            int fuel = 0;
-            File.ReadAllLines("Day01.txt").Select(x => Convert.ToDecimal(x)).ToList().ForEach(x =>
-            {
-                fuel += (int)(Math.Floor(x / 3) - 2);
-            });
-
+            int fuel = File.ReadAllLines("Day01.txt").Select(x => GetFuel(int.Parse(x))).Sum();
             return $"Day 01 Part 1: {fuel}";
         }
 
         public string PartTwo()
         {
-            int fuel = 0;
-            File.ReadAllLines("Day01.txt").Select(x => Convert.ToDecimal(x)).ToList().ForEach(x =>
-            {
-                fuel += GetFuel(x);
-            });
-
+            int fuel = File.ReadAllLines("Day01.txt").Select(x => (int.TryParse(x, out int value) ? GetFuelAndSubFuel(value) : 0)).Sum();
             return $"Day 01 Part 2: {fuel}";
         }
 
-        private int GetFuel(decimal value)
+        private int GetFuelAndSubFuel(int value)
         {
-            var fuel = Math.Floor(value / 3) - 2;
-            return (fuel > 0) ? (int)(fuel + GetFuel(fuel)) : 0;
+            var fuel = GetFuel(value);
+            return (fuel > 0) ? (fuel + GetFuelAndSubFuel(fuel)) : 0;
+        }
+
+        private int GetFuel(int value)
+        {
+            return (value / 3) - 2;
         }
     }
 }
