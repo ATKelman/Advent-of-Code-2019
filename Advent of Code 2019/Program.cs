@@ -11,9 +11,16 @@ namespace Advent_of_Code_2019
     {
         static void Main(string[] args)
         {
-            var Day = new Day01();
-            Console.WriteLine(Day.PartOne());
-            Console.WriteLine(Day.PartTwo());
+			try
+			{
+				var Day = new Day02();
+				Console.WriteLine(Day.PartOne());
+				Console.WriteLine(Day.PartTwo());
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 
             Console.ReadLine();
         }
