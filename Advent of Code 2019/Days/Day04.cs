@@ -24,7 +24,6 @@ namespace Advent_of_Code_2019.Days
 		private bool MeetsCriteria(int value)
 		{
 			var values = new List<int>();
-			var matches = 0;
 			var containsDouble = false;
 			for (int i = 0; i < 6; i++)
 			{
@@ -36,12 +35,7 @@ namespace Advent_of_Code_2019.Days
 						return false;
 
 					if (values[i - 1] == values[i])
-					{
-						matches++;
 						containsDouble = true;
-					}
-					else
-						matches = 0;
 				}
 			}
 
@@ -81,7 +75,7 @@ namespace Advent_of_Code_2019.Days
 					}
 					else
 					{
-						containsDouble = (matches == 1) ? true : containsDouble;
+						containsDouble = (containsDouble || matches == 1);
 						matches = 0;
 					}
 				}
