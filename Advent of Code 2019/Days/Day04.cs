@@ -41,10 +41,7 @@ namespace Advent_of_Code_2019.Days
 						containsDouble = true;
 					}
 					else
-					{
-
 						matches = 0;
-					}
 				}
 			}
 
