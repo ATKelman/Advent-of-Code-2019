@@ -59,19 +59,11 @@ namespace Advent_of_Code_2019.Days
                 while (stillRunning.Count > 0)
                 {
                     var instance = stillRunning.Dequeue();
-                    instance.Inputs.Enqueue(amplifierOutput);
-                    try
+                    instance.Inputs.Enqueue(amplifierOutput);                   
+                    if (instance.RunProgram())
                     {
-                        if (instance.RunProgram())
-                        {
-                            stillRunning.Enqueue(instance);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        var test = ex;
-                    }
-
+                        stillRunning.Enqueue(instance);
+                    }                 
                     amplifierOutput = instance.Outputs.Dequeue();
                 }
 
