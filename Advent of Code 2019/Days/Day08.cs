@@ -29,6 +29,10 @@ namespace Advent_of_Code_2019.Days
             var layers = Enumerable.Range(0, (input.Count() / imageSize))
                 .Select(x => input.Substring(x * imageSize, imageSize)).ToList();
 
+            /* Originally used multiple nested for-loops, cleaned using 1 nested Enumerable.Range
+             * Method learned from:
+             * https://github.com/viceroypenguin/adventofcode/blob/master/2019/day08.original.cs
+             */
             var result = Enumerable.Range(0, imageSize)
                 .Select(x => Enumerable.Range(0, layers.Count)
                     .Select(y => layers[y][x])
