@@ -36,7 +36,7 @@ namespace Advent_of_Code_2019.Days
 
         public string PartTwo()
         {
-            var input = System.IO.File.ReadAllText("Day07.txt").Split(',').Select(x => int.Parse(x)).ToArray();
+            var input = System.IO.File.ReadAllText("Day07.txt").Split(',').Select(x => long.Parse(x)).ToArray();
 
             var intComputers = new IntComputer[5];
             for (int i = 0; i < 5; i++)
@@ -64,7 +64,7 @@ namespace Advent_of_Code_2019.Days
                     {
                         stillRunning.Enqueue(instance);
                     }                 
-                    amplifierOutput = instance.Outputs.Dequeue();
+                    amplifierOutput = (int)instance.Outputs.Dequeue();
                 }
 
                 if (amplifierOutput > maxThruster)

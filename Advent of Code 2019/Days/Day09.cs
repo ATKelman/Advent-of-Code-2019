@@ -10,12 +10,26 @@ namespace Advent_of_Code_2019.Days
     {
         public string PartOne()
         {
-            throw new NotImplementedException();
+            var input = System.IO.File.ReadAllText("Day09.txt").Split(',').Select(x => long.Parse(x)).ToArray();
+            var intComputer = new IntComputer(input);
+
+            intComputer.Inputs.Enqueue(1);
+            intComputer.RunProgram();
+            var result = intComputer.Outputs.Dequeue();
+
+            return $"Day 9 Part 1: {result}";
         }
 
         public string PartTwo()
         {
-            throw new NotImplementedException();
+            var input = System.IO.File.ReadAllText("Day09.txt").Split(',').Select(x => long.Parse(x)).ToArray();
+            var intComputer = new IntComputer(input);
+
+            intComputer.Inputs.Enqueue(2);
+            intComputer.RunProgram();
+            var result = intComputer.Outputs.Dequeue();
+
+            return $"Day 9 Part 2: {result}";
         }
     }
 }
