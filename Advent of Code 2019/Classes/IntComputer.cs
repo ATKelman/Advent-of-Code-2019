@@ -75,20 +75,12 @@ namespace Advent_of_Code_2019
                     case 5:
                         a = Read(modeA);
                         b = Read(modeB);
-                        //op = (a != 0) ? b : op + 1;
-                        if (a == 0)
-                            op++;
-                        else
-                            op = b;
+                        op = (a != 0) ? b : op + 1;
                         continue;
                     case 6:
                         a = Read(modeA);
                         b = Read(modeB);
-                        //op = (a == 0) ? b : op + 1;
-                        if (a == 0)
-                            op = b;
-                        else
-                            op++;
+                        op = (a == 0) ? b : op + 1;
                         continue;
                     case 7:
                         a = Read(modeA);
