@@ -147,22 +147,12 @@ namespace Advent_of_Code_2019.Days
 			}
 		}
 
-		public void AdjustVelocity(int vel, int index)
-		{
-			Velocity[index] += vel;
-		}
-
 		public void ApplyVelocity()
 		{
 			for (int i = 0; i < Position.Length; i++)
 			{
 				Position[i] += Velocity[i];
 			}
-		}
-
-		public void ApplyVelocity(int index)
-		{
-			Position[index] += Velocity[index];
 		}
 
 		public int CalculateTotalEnergy()
