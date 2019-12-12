@@ -20,7 +20,14 @@ namespace Advent_of_Code_2019.Days
 			{
 				var values = numbersPattern.Matches(line);
 				moons.Add(
-					new Moon((int.Parse(values[0].Value), int.Parse(values[1].Value), int.Parse(values[2].Value))));
+					new Moon(
+						new int[3]
+						{
+							int.Parse(values[0].Value),
+							int.Parse(values[1].Value),
+							int.Parse(values[2].Value)
+						}
+						));
 			}
 
 			for (int i = 0; i < steps; i++)
@@ -40,13 +47,15 @@ namespace Advent_of_Code_2019.Days
 			return $"Day 12 Part 1: {result}";
 		}
 
-		private (int x, int y, int z) GetVelocityAdjustment((int x, int y, int z) pos1, (int x, int y, int z) pos2)
+		private int[] GetVelocityAdjustment(int[] pos1, int[] pos2)
 		{
-			var x = (pos1.x == pos2.x) ? 0 : (pos1.x > pos2.x) ? -1 : 1;
-			var y = (pos1.y == pos2.y) ? 0 : (pos1.y > pos2.y) ? -1 : 1;
-			var z = (pos1.z == pos2.z) ? 0 : (pos1.z > pos2.z) ? -1 : 1;
+			var adjustment = new int[pos1.Length];
+			for (int i = 0; i < pos1.Length; i++)
+			{
+				adjustment[i] = (pos1[i] == pos2[i] ? 0 : pos1[i] > pos2[i] ? -1 : 1);
+			}
 
-			return (x, y, z);
+			return adjustment;
 		}
 
 		public string PartTwo()
@@ -59,7 +68,14 @@ namespace Advent_of_Code_2019.Days
 			{
 				var values = numbersPattern.Matches(line);
 				moons.Add(
-					new Moon((int.Parse(values[0].Value), int.Parse(values[1].Value), int.Parse(values[2].Value))));
+					new Moon(
+						new int[3]
+						{
+							int.Parse(values[0].Value),
+							int.Parse(values[1].Value),
+							int.Parse(values[2].Value)
+						}
+						));
 			}
 
 			var result = 0;
@@ -69,28 +85,45 @@ namespace Advent_of_Code_2019.Days
 
 	public class Moon
 	{
-		public (int x, int y, int z) Position { get; set; }
-		public (int x, int y, int z) Velocity { get; set; }
+		public int[] Position { get; set; }
+		public int[] Velocity { get; set; }
 
-		public Moon((int x, int y, int z) startPos)
+		public Moon(int[] startPos)
 		{
 			Position = startPos;
-			Velocity = (0, 0, 0);
+			Velocity = new int[3];
 		}
 
-		public void AdjustVelocity((int x, int y, int z) vel)
+		public void AdjustVelocity(int[] vel)
 		{
-			Velocity = (Velocity.x + vel.x, Velocity.y + vel.y, Velocity.z + vel.z);
+			if (vel.Length != Velocity.Length)
+				throw new Exception($"Error - Velocity adjustment length does not match Velocity length! Velocity Length: {Velocity.Length}, Adjustment Length: {vel.Length}.");
+
+			for (int i = 0; i < vel.Length; i++)
+			{
+				Velocity[i] += vel[i];
+			}
 		}
 
 		public void ApplyVelocity()
 		{
-			Position = (Position.x + Velocity.x, Position.y + Velocity.y, Position.z + Velocity.z);
+			for (int i = 0; i < Position.Length; i++)
+			{
+				Position[i] += Velocity[i];
+			}
 		}
 
 		public int CalculateTotalEnergy()
 		{
-			return (Math.Abs(Position.x) + Math.Abs(Position.y) + Math.Abs(Position.z)) * (Math.Abs(Velocity.x) + Math.Abs(Velocity.y) + Math.Abs(Velocity.z));
+			var potentialEnergy = 0;
+			foreach (var pos in Position)
+				potentialEnergy += Math.Abs(pos);
+
+			var kineticEnergy = 0;
+			foreach (var vel in Velocity)
+				kineticEnergy += Math.Abs(vel);
+
+			return potentialEnergy * kineticEnergy;
 		}
 	}
 }
