@@ -16,17 +16,7 @@ namespace Advent_of_Code_2019.Days
             intComputer.RunProgram();
 
             var grid = new Dictionary<(long, long), long>();
-            while (intComputer.Outputs.Count() > 0)
-            {
-                var x = intComputer.Outputs.Dequeue();
-                var y = intComputer.Outputs.Dequeue();
-                var id = intComputer.Outputs.Dequeue();
-
-                if (!grid.ContainsKey((x, y)))
-                {
-                    grid.Add((x, y), id);
-                }
-            }
+            ProcessOutputs(ref grid, ref intComputer);
 
             return $"Day 14 Part 1 {grid.Values.Where(x => x == 2).Count()}.";
         }
@@ -52,11 +42,9 @@ namespace Advent_of_Code_2019.Days
                 else
                     intComputer.Inputs.Enqueue(0);
             }
-
             ProcessOutputs(ref grid, ref intComputer);
 
-            var value = grid[(-1, 0)];
-            return $"Day 14 Part 2: {value}";
+            return $"Day 14 Part 2: {grid[(-1, 0)]}";
         }
 
         private void ProcessOutputs(ref Dictionary<(long, long), long> grid, ref IntComputer intComputer)
