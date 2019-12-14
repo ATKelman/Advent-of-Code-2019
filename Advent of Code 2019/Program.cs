@@ -13,7 +13,7 @@ namespace Advent_of_Code_2019
         {
 			try
 			{
-				var Day = new Day14();
+				var Day = new Day13();
 				Console.WriteLine(Day.PartOne());
 				Console.WriteLine(Day.PartTwo());
 			}
